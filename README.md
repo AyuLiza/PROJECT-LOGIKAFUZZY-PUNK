@@ -1,10 +1,10 @@
-# 🌾 SiPadi Fuzzy
+# SiPadi Fuzzy
 
 ## Penerapan Fuzzy Inference System Metode Mamdani untuk Rekomendasi Kebutuhan Pupuk dan Irigasi Tanaman Padi di Kabupaten Lombok Tengah
 
 ---
 
-## 👥 Kelompok Punk
+## Kelompok Punk
 
 | No. | Nama | NIM |
 |-----|------|-----|
@@ -15,7 +15,7 @@
 
 ---
 
-## 📖 Deskripsi
+## Deskripsi
 
 SiPadi Fuzzy adalah aplikasi web yang membantu petani dan penyuluh lapangan dalam menentukan rekomendasi kebutuhan pupuk urea dan irigasi untuk tanaman padi di Kabupaten Lombok Tengah, NTB.
 
@@ -34,7 +34,7 @@ Dan menghasilkan dua output rekomendasi:
 
 ---
 
-## 🔧 Teknologi yang Digunakan
+## Teknologi yang Digunakan
 
 - **HTML5** - Struktur markup
 - **CSS3** - Styling dan responsif design
@@ -43,7 +43,7 @@ Dan menghasilkan dua output rekomendasi:
 
 ---
 
-## 📁 Struktur File
+## Struktur File
 
 ```
 PROJECT-LOGIKAFUZZY-PUNK/
@@ -55,7 +55,7 @@ PROJECT-LOGIKAFUZZY-PUNK/
 
 ---
 
-## 🚀 Cara Menggunakan
+## Cara Menggunakan
 
 ### Membuka Aplikasi
 
@@ -87,7 +87,7 @@ PROJECT-LOGIKAFUZZY-PUNK/
 
 ---
 
-## 🧠 Metodologi Fuzzy Mamdani
+## Metodologi Fuzzy Mamdani
 
 Sistem mengimplementasikan 4 tahap utama:
 
@@ -115,7 +115,7 @@ $$z^* = \frac{∫ z·μ(z) \, dz}{∫ μ(z) \, dz}$$
 
 ---
 
-## 📊 Basis Aturan Fuzzy
+## Basis Aturan Fuzzy
 
 Sistem menggunakan **27 aturan fuzzy** yang mencakup semua kombinasi:
 
@@ -130,7 +130,7 @@ Sistem menggunakan **27 aturan fuzzy** yang mencakup semua kombinasi:
 
 ---
 
-## 📈 Fitur Utama
+## Fitur Utama
 
 ✅ **Input Interaktif**
 
@@ -168,7 +168,7 @@ Sistem menggunakan **27 aturan fuzzy** yang mencakup semua kombinasi:
 
 ---
 
-## 🎨 Desain & Interface
+## Desain dan Interface
 
 - **Palet Warna Hijau-Biru** - Mencerminkan tema pertanian dan air
 - **Typography Profesional** - DM Serif Display (judul), Nunito (body), IBM Plex Mono (data)
@@ -177,7 +177,7 @@ Sistem menggunakan **27 aturan fuzzy** yang mencakup semua kombinasi:
 
 ---
 
-## 📚 Referensi
+## Referensi
 
 - **Fadila, S.** (2022). *Aplikasi Ricezzy untuk Menghitung Irigasi Tanaman Padi Menggunakan Metode Fuzzy Mamdani.* JEKIN, 2(1). DOI: 10.58794/jekin.v2i1.88
 
@@ -187,7 +187,7 @@ Sistem menggunakan **27 aturan fuzzy** yang mencakup semua kombinasi:
 
 ---
 
-## 💡 Catatan Teknis
+## Catatan Teknis
 
 ### Defuzzifikasi Centroid
 
