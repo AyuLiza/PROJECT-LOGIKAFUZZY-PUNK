@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiPadi Fuzzy – Rekomendasi Pupuk & Irigasi Padi Lombok</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;600&family=Nunito:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>🌾 SiPadi <span>Fuzzy</span></h1>
+        <p class="subtitle">Sistem Inferensi Fuzzy Mamdani · Lombok Tengah, NTB</p>
+        <span class="badge">Rekomendasi Pupuk Urea & Irigasi Padi</span>
+    </header>
+
+    <main>
+        <!-- Kartu Parameter Input -->
+        <div class="card">
+            <h2><span class="icon">🌡️</span> Parameter Input</h2>
+
+            <div class="input-group">
+                <label>
+                    Suhu Udara
+                    <span><span class="val-display" id="val-suhu">28</span> <span class="unit">°C</span></span>
+                </label>
+                <input type="range" id="suhu" min="15" max="40" value="28" step="0.5"
+                    oninput="updateVal('suhu',this.value); updateGradient(this); hitung()">
+                <div class="range-labels"><span>15°C (Dingin)</span><span>40°C (Panas)</span></div>
+            </div>
+
+            <div class="input-group">
+                <label>
+                    Kelembapan Relatif
+                    <span><span class="val-display" id="val-kelembapan">65</span> <span class="unit">%</span></span>
+                </label>
+                <input type="range" id="kelembapan" min="20" max="100" value="65" step="1"
+                    oninput="updateVal('kelembapan',this.value); updateGradient(this); hitung()">
+                <div class="range-labels"><span>20% (Rendah)</span><span>100% (Tinggi)</span></div>
+            </div>
+
+            <div class="input-group">
+                <label>
+                    Tinggi Genangan Air
+                    <span><span class="val-display" id="val-tinggiair">12</span> <span class="unit">cm</span></span>
+                </label>
+                <input type="range" id="tinggiair" min="0" max="30" value="12" step="0.5"
+                    oninput="updateVal('tinggiair',this.value); updateGradient(this); hitung()">
+                <div class="range-labels"><span>0 cm (Kering)</span><span>30 cm (Tergenang)</span></div>
+            </div>
+
+            <!-- Data Sampel -->
+            <div style="margin-top:1.2rem">
+                <div
+                    style="font-size:0.8rem;font-weight:700;color:#555;margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:0.5px;">
+                    📋 Data Sampel</div>
+                <div class="sampel-grid">
+                    <button class="sampel-btn" onclick="setSampel(32,45,5)">Kasus 1<span>Panas-Kering</span></button>
+                    <button class="sampel-btn" onclick="setSampel(26,65,13)">Kasus 2<span>Normal</span></button>
+                    <button class="sampel-btn" onclick="setSampel(20,80,18)">Kasus 3<span>Sejuk-Basah</span></button>
+                    <button class="sampel-btn" onclick="setSampel(35,30,2)">Kasus 4<span>Sangat Kering</span></button>
+                    <button class="sampel-btn" onclick="setSampel(22,55,10)">Kasus 5<span>Sejuk-Sedang</span></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kartu Hasil -->
+        <div class="card">
+            <h2><span class="icon">📊</span> Hasil Rekomendasi</h2>
+
+            <!-- Rekomendasi Naratif -->
+            <div class="rekomendasi-box" id="rekomendasi-box">
+                <span class="emoji">🌾</span>
+                <div class="teks" id="rekomendasi-teks">
+                    Geser slider atau pilih data sampel untuk melihat rekomendasi.
+                    <span class="kondisi" id="rekomendasi-kondisi"></span>
+                </div>
+            </div>
+
+            <div class="hasil-grid">
+                <div class="hasil-card pupuk">
+                    <div class="label">🌿 Pupuk Urea</div>
+                    <div class="angka" id="res-pupuk">—</div>
+                    <div class="satuan">kg / Hektar</div>
+                    <div class="kategori" id="kat-pupuk">—</div>
+                </div>
+                <div class="hasil-card irigasi">
+                    <div class="label">💧 Debit Irigasi</div>
+                    <div class="angka" id="res-irigasi">—</div>
+                    <div class="satuan">L/s / Hektar</div>
+                    <div class="kategori" id="kat-irigasi">—</div>
+                </div>
+            </div>
+
+            <!-- Derajat Keanggotaan -->
+            <div class="progress-section">
+                <h3>Derajat Keanggotaan Input</h3>
+                <!-- Suhu -->
+                <div class="prog-row">
+                    <div class="prog-label">Suhu: Dingin</div>
+                    <div class="prog-bar-wrap">
+                        <div class="prog-bar" id="pb-su-d" style="background:#74c69d;width:0%"></div>
+                    </div>
+                    <div class="prog-val" id="pv-su-d">0.00</div>
+                </div>
+                <div class="prog-row">
+                    <div class="prog-label">Suhu: Sedang</div>
+                    <div class="prog-bar-wrap">
+                        <div class="prog-bar" id="pb-su-s" style="background:#52b788;width:0%"></div>
+                    </div>
+                    <div class="prog-val" id="pv-su-s">0.00</div>
+                </div>
+                <div class="prog-row">
+                    <div class="prog-label">Suhu: Panas</div>
+                    <div class="prog-bar-wrap">
+                        <div class="prog-bar" id="pb-su-p" style="background:#e63946;width:0%"></div>
+                    </div>
+                    <div class="prog-val" id="pv-su-p">0.00</div>
+                </div>
+                <!-- Kelembapan -->
+                <div class="prog-row">
+                    <div class="prog-label">Kelb: Rendah</div>
+                    <div class="prog-bar-wrap">
+                        <div class="prog-bar" id="pb-ke-r" style="background:#f4d35e;width:0%"></div>
+                    </div>
+                    <div class="prog-val" id="pv-ke-r">0.00</div>
+                </div>
+                <div class="prog-row">
+                    <div class="prog-label">Kelb: Sedang</div>
+                    <div class="prog-bar-wrap">
+                        <div class="prog-bar" id="pb-ke-s" style="background:#52b788;width:0%"></div>
+                    </div>
+                    <div class="prog-val" id="pv-ke-s">0.00</div>
+                </div>
+                <div class="prog-row">
+                    <div class="prog-label">Kelb: Tinggi</div>
+                    <div class="prog-bar-wrap">
+                        <div class="prog-bar" id="pb-ke-t" style="background:#4cc9f0;width:0%"></div>
+                    </div>
+                    <div class="prog-val" id="pv-ke-t">0.00</div>
+                </div>
+                <!-- Tinggi Air -->
+                <div class="prog-row">
+                    <div class="prog-label">Air: Kering</div>
+                    <div class="prog-bar-wrap">
+                        <div class="prog-bar" id="pb-ta-k" style="background:#f4d35e;width:0%"></div>
+                    </div>
+                    <div class="prog-val" id="pv-ta-k">0.00</div>
+                </div>
+                <div class="prog-row">
+                    <div class="prog-label">Air: Cukup</div>
+                    <div class="prog-bar-wrap">
+                        <div class="prog-bar" id="pb-ta-c" style="background:#52b788;width:0%"></div>
+                    </div>
+                    <div class="prog-val" id="pv-ta-c">0.00</div>
+                </div>
+                <div class="prog-row">
+                    <div class="prog-label">Air: Tergenang</div>
+                    <div class="prog-bar-wrap">
+                        <div class="prog-bar" id="pb-ta-t" style="background:#4cc9f0;width:0%"></div>
+                    </div>
+                    <div class="prog-val" id="pv-ta-t">0.00</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grafik Fungsi Keanggotaan -->
+        <div class="card card-full">
+            <h2><span class="icon">📈</span> Grafik Fungsi Keanggotaan</h2>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;">
+                <div>
+                    <div class="canvas-title">Suhu Udara (°C)</div>
+                    <canvas id="c-suhu" height="120"></canvas>
+                </div>
+                <div>
+                    <div class="canvas-title">Kelembapan (%)</div>
+                    <canvas id="c-kelembapan" height="120"></canvas>
+                </div>
+                <div>
+                    <div class="canvas-title">Tinggi Air (cm)</div>
+                    <canvas id="c-tinggiair" height="120"></canvas>
+                </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem;">
+                <div>
+                    <div class="canvas-title">Output: Pupuk Urea (kg/Ha)</div>
+                    <canvas id="c-pupuk" height="120"></canvas>
+                </div>
+                <div>
+                    <div class="canvas-title">Output: Debit Irigasi (L/s/Ha)</div>
+                    <canvas id="c-irigasi" height="120"></canvas>
+                </div>
+            </div>
+            <div style="display:flex;gap:1.5rem;justify-content:center;margin-top:0.8rem;flex-wrap:wrap;">
+                <span style="font-size:0.75rem;display:flex;align-items:center;gap:4px;"><span
+                        style="width:12px;height:3px;background:#52b788;display:inline-block;border-radius:2px"></span>
+                    Rendah/Kecil/Sedikit</span>
+                <span style="font-size:0.75rem;display:flex;align-items:center;gap:4px;"><span
+                        style="width:12px;height:3px;background:#f4d35e;display:inline-block;border-radius:2px"></span>
+                    Sedang/Cukup</span>
+                <span style="font-size:0.75rem;display:flex;align-items:center;gap:4px;"><span
+                        style="width:12px;height:3px;background:#e63946;display:inline-block;border-radius:2px"></span>
+                    Tinggi/Besar/Banyak</span>
+                <span style="font-size:0.75rem;display:flex;align-items:center;gap:4px;"><span
+                        style="width:12px;height:3px;background:#1e6091;display:inline-block;border-radius:2px;border-top:2px dashed #1e6091"></span>
+                    Nilai input saat ini</span>
+            </div>
+        </div>
+
+        <!-- Alur Proses Mamdani -->
+        <div class="card card-full">
+            <h2><span class="icon">🧭</span> Alur Proses Metode Fuzzy Mamdani</h2>
+            <p style="font-size:0.82rem;color:#666;margin-bottom:1rem;">
+                Setiap kali nilai input diubah, sistem otomatis menjalankan 4 tahap berikut untuk menghasilkan
+                rekomendasi.
+            </p>
+            <ol class="steps-list">
+                <li>
+                    <strong>Fuzzifikasi</strong>
+                    <p>Nilai input diubah menjadi derajat keanggotaan (0–1) pada himpunan fuzzy "rendah/sedang/tinggi"
+                        menggunakan fungsi segitiga.</p>
+                </li>
+                <li>
+                    <strong>Aplikasi Fungsi Implikasi (MIN)</strong>
+                    <p>Untuk tiap aturan, nilai α-predikat dihitung sebagai minimum dari ketiga derajat keanggotaan
+                        input.</p>
+                    <span class="formula">α = min(μ_suhu, μ_kelembapan, μ_air)</span>
+                </li>
+                <li>
+                    <strong>Komposisi Aturan (MAX)</strong>
+                    <p>Daerah fuzzy keluaran dari semua aturan aktif digabungkan menggunakan operator maksimum.</p>
+                </li>
+                <li>
+                    <strong>Defuzzifikasi (Centroid)</strong>
+                    <p>Daerah agregat dihitung titik beratnya untuk menghasilkan nilai akhir crisp dalam kg/Ha (pupuk)
+                        dan L/s/Ha (irigasi).</p>
+                    <span class="formula">z* = ∫ z·μ(z) dz / ∫ μ(z) dz</span>
+                </li>
+            </ol>
+        </div>
+
+        <!-- Aturan Fuzzy Aktif -->
+        <div class="card card-full">
+            <h2><span class="icon">⚙️</span> Aturan Fuzzy yang Aktif (α > 0)</h2>
+            <div class="rule-list" id="rule-list"></div>
+            <div class="info-box" style="margin-top:1rem;">
+                <strong>Referensi:</strong> Basis aturan diadaptasi dari Fadila, S. (2022). <em>Aplikasi Ricezzy untuk
+                    Menghitung Irigasi Tanaman Padi Menggunakan Metode Fuzzy Mamdani.</em> JEKIN, 2(1). DOI:
+                10.58794/jekin.v2i1.88 · Diterapkan pada kondisi Lombok Tengah, NTB.
+            </div>
+        </div>
+
+        <!-- Tabel Hasil Pengujian -->
+        <div class="card card-full">
+            <h2><span class="icon">📋</span> Tabel Hasil Pengujian Lima Skenario</h2>
+            <p style="font-size:0.82rem;color:#666;margin-bottom:1rem;">
+                Hasil defuzzifikasi centroid numerik dari lima skenario data sampel yang mewakili kondisi musim tanam di
+                Lombok Tengah.
+            </p>
+            <div style="overflow-x:auto;">
+                <table id="tabel-sampel">
+                    <thead>
+                        <tr>
+                            <th>Kasus</th>
+                            <th>Suhu (°C)</th>
+                            <th>Kelembapan (%)</th>
+                            <th>Tinggi Air (cm)</th>
+                            <th>Pupuk (kg/Ha)</th>
+                            <th>Irigasi (L/s/Ha)</th>
+                            <th>Kat. Pupuk</th>
+                            <th>Kat. Irigasi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-sampel">
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size:0.75rem;color:var(--abu);margin-top:0.7rem;font-family:'IBM Plex Mono',monospace;">
+                * Nilai dihitung otomatis oleh mesin inferensi yang sama dengan slider di atas.
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        SiPadi Fuzzy · Tugas Besar Logika Fuzzy · Prodi Teknik Informatika · 2025/2026 . Kelompok Punk
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

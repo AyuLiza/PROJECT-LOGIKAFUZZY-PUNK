@@ -1,0 +1,642 @@
+/* SiPadi Fuzzy - Lembar Gaya */
+
+:root {
+    --hijau: #2d6a4f;
+    --hijau-muda: #52b788;
+    --hijau-terang: #95d5b2;
+    --krem: #f8f4e9;
+    --tanah: #8b5e3c;
+    --biru-air: #1e6091;
+    --biru-muda: #4cc9f0;
+    --kuning: #ffd166;
+    --merah: #e63946;
+    --putih: #ffffff;
+    --abu: #6c757d;
+    --bg: #f0f4f0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    background-image:
+        radial-gradient(ellipse at 10% 20%, rgba(82, 183, 136, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 90% 80%, rgba(30, 96, 145, 0.1) 0%, transparent 50%);
+}
+
+/* Kepala Halaman */
+header {
+    background: linear-gradient(135deg, var(--hijau) 0%, #1b4332 100%);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+}
+
+header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    letter-spacing: -0.5px;
+    position: relative;
+}
+
+header h1 span {
+    color: var(--hijau-terang);
+}
+
+header p.subtitle {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 0.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    position: relative;
+}
+
+.badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    padding: 0.2rem 0.8rem;
+    font-size: 0.75rem;
+    margin-top: 0.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    position: relative;
+}
+
+/* Tata Letak Utama */
+main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+    border: 1px solid rgba(45, 106, 79, 0.1);
+}
+
+.card-full {
+    grid-column: 1 / -1;
+}
+
+.card h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    color: var(--hijau);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.card h2 .icon {
+    font-size: 1.3rem;
+}
+
+/* Formulir Input */
+.input-group {
+    margin-bottom: 1.2rem;
+}
+
+.input-group label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.input-group label .unit {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 400;
+    color: var(--abu);
+    font-size: 0.8rem;
+}
+
+.val-display {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--hijau);
+    background: var(--bg);
+    padding: 0.15rem 0.5rem;
+    border-radius: 6px;
+}
+
+input[type=range] {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(to right, var(--hijau-muda) 0%, var(--bg) 0%);
+    outline: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--hijau);
+    box-shadow: 0 2px 6px rgba(45, 106, 79, 0.4);
+    cursor: pointer;
+    transition: transform 0.15s;
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.range-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    color: var(--abu);
+    font-family: 'IBM Plex Mono', monospace;
+    margin-top: 0.2rem;
+}
+
+/* Pita Keanggotaan */
+.membership-strip {
+    display: flex;
+    gap: 4px;
+    margin-top: 0.5rem;
+}
+
+.membership-strip .ms {
+    flex: 1;
+    height: 6px;
+    border-radius: 3px;
+    position: relative;
+    overflow: visible;
+}
+
+.ms-label {
+    font-size: 0.65rem;
+    color: var(--abu);
+    text-align: center;
+    margin-top: 2px;
+    white-space: nowrap;
+}
+
+/* Tombol */
+.btn-hitung {
+    grid-column: 1 / -1;
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--hijau) 0%, #1b4332 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 16px rgba(45, 106, 79, 0.35);
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.btn-hitung:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(45, 106, 79, 0.45);
+}
+
+.btn-hitung:active {
+    transform: translateY(0);
+}
+
+/* Hasil */
+.hasil-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.hasil-card {
+    border-radius: 12px;
+    padding: 1.2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hasil-card.pupuk {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+    border: 2px solid var(--kuning);
+}
+
+.hasil-card.irigasi {
+    background: linear-gradient(135deg, #cfe2ff 0%, #9ec5fe 100%);
+    border: 2px solid var(--biru-muda);
+}
+
+.hasil-card .label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #555;
+    margin-bottom: 0.3rem;
+}
+
+.hasil-card .angka {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem;
+    color: #1a1a1a;
+    line-height: 1.1;
+}
+
+.hasil-card .satuan {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 0.2rem;
+}
+
+.hasil-card .kategori {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.pupuk .kategori.sedikit {
+    background: #d4edda;
+    color: #155724;
+}
+
+.pupuk .kategori.sedang {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.pupuk .kategori.banyak {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.irigasi .kategori.kecil {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.irigasi .kategori.sedang {
+    background: #cce5ff;
+    color: #004085;
+}
+
+.irigasi .kategori.besar {
+    background: #b8daff;
+    color: #002752;
+}
+
+/* Kotak Rekomendasi */
+.rekomendasi-box {
+    background: linear-gradient(135deg, #f1f8f4 0%, #e8f5e9 100%);
+    border: 1.5px solid var(--hijau-terang);
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.2rem;
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+}
+
+.rekomendasi-box .emoji {
+    font-size: 1.6rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.rekomendasi-box .teks {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: #2d5a3d;
+}
+
+.rekomendasi-box .teks strong {
+    color: var(--hijau);
+}
+
+.rekomendasi-box .teks .kondisi {
+    display: block;
+    font-size: 0.72rem;
+    font-family: 'IBM Plex Mono', monospace;
+    color: #5a8a6e;
+    margin-top: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+/* Langkah-langkah Proses */
+.steps-list {
+    list-style: none;
+    counter-reset: step;
+}
+
+.steps-list li {
+    counter-increment: step;
+    position: relative;
+    padding: 0 0 1.1rem 2.4rem;
+    border-left: 2px solid #d8ecdf;
+    margin-left: 0.8rem;
+}
+
+.steps-list li:last-child {
+    border-left: 2px solid transparent;
+    padding-bottom: 0;
+}
+
+.steps-list li::before {
+    content: counter(step);
+    position: absolute;
+    left: -1rem;
+    top: -0.1rem;
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: 50%;
+    background: var(--hijau);
+    color: white;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.steps-list li strong {
+    display: block;
+    font-size: 0.88rem;
+    color: #1a1a1a;
+    margin-bottom: 0.2rem;
+}
+
+.steps-list li p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+.steps-list li .formula {
+    display: inline-block;
+    margin-top: 0.35rem;
+    background: var(--bg);
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--hijau);
+}
+
+/* Bilah Kemajuan */
+.progress-section h3 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.prog-row {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 0.6rem;
+}
+
+.prog-label {
+    font-size: 0.8rem;
+    width: 100px;
+    flex-shrink: 0;
+    color: #333;
+    font-weight: 600;
+}
+
+.prog-bar-wrap {
+    flex: 1;
+    height: 10px;
+    background: var(--bg);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.prog-bar {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.prog-val {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    width: 40px;
+    text-align: right;
+    color: #555;
+}
+
+/* Kanvas */
+canvas {
+    width: 100%;
+    border-radius: 8px;
+    background: var(--bg);
+    display: block;
+}
+
+.canvas-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--abu);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+/* Aturan */
+.aturan-aktif {
+    margin-top: 1rem;
+}
+
+.aturan-aktif h3 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.rule-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.rule-item {
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.rule-item.aktif {
+    background: #e8f5e9;
+    border-left-color: var(--hijau-muda);
+}
+
+.rule-alpha {
+    font-weight: 600;
+    color: var(--hijau);
+    min-width: 50px;
+}
+
+.rule-text {
+    color: #444;
+    flex: 1;
+    font-size: 0.75rem;
+}
+
+/* Tombol Sampel */
+.sampel-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+}
+
+.sampel-btn {
+    padding: 0.5rem 0.3rem;
+    border: 2px solid var(--hijau-terang);
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    text-align: center;
+    font-size: 0.72rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    color: var(--hijau);
+    transition: all 0.2s;
+}
+
+.sampel-btn:hover {
+    background: var(--hijau);
+    color: white;
+    border-color: var(--hijau);
+}
+
+.sampel-btn span {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 400;
+    margin-top: 2px;
+    opacity: 0.7;
+}
+
+/* Kotak Informasi */
+.info-box {
+    background: linear-gradient(135deg, #e8f5e9, #f1f8f4);
+    border: 1px solid var(--hijau-terang);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    font-size: 0.8rem;
+    color: #2d5a3d;
+    line-height: 1.6;
+}
+
+.info-box strong {
+    color: var(--hijau);
+}
+
+/* Kaki Halaman */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.78rem;
+    color: var(--abu);
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+/* Tabel */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.83rem;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+table thead tr {
+    background: var(--hijau);
+    color: white;
+}
+
+table th {
+    padding: 0.6rem 0.8rem;
+    text-align: center;
+}
+
+table td {
+    padding: 0.5rem 0.8rem;
+    text-align: center;
+}
+
+/* Responsif */
+@media (max-width: 640px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    .card-full,
+    .hasil-grid,
+    .sampel-grid {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    .hasil-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
