@@ -203,6 +203,6 @@ Sistem menggunakan **27 aturan fuzzy** yang mencakup semua kombinasi:
 
 ## 📝 Lisensi
 
-Proyek ini adalah tugas besar mata kuliah Logika Fuzzy dan dapat digunakan untuk keperluan akademik dan penelitian.
+Proyek ini adalah tugas besar mata kuliah Logika Fuzzy dan dapat digunakan untuk keperluan akademik.
 
 ---
