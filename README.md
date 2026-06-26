@@ -177,16 +177,6 @@ Sistem menggunakan **27 aturan fuzzy** yang mencakup semua kombinasi:
 
 ---
 
-## Referensi
-
-- **Fadila, S.** (2022). *Aplikasi Ricezzy untuk Menghitung Irigasi Tanaman Padi Menggunakan Metode Fuzzy Mamdani.* JEKIN, 2(1). DOI: 10.58794/jekin.v2i1.88
-
-- **Kusumadewi, S., & Purnomo, H.** (2010). *Aplikasi Logika Fuzzy untuk Pendukung Keputusan.* Graha Ilmu.
-
-- **Ross, T. J.** (2010). *Fuzzy Logic with Engineering Applications.* Wiley.
-
----
-
 ## Catatan Teknis
 
 ### Defuzzifikasi Centroid
